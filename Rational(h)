@@ -1,0 +1,54 @@
+#ifndef OOP_ASSIGNMENTS_R_H
+#define OOP_ASSIGNMENTS_R_H
+
+#include <iostream>
+#include <stdexcept>
+#define L long long
+class RationalDivisionByZero : public std::runtime_error {
+ public:
+  RationalDivisionByZero() : std::runtime_error("RationalDivisionByZero") {
+  }
+};
+L Gcd(L a, L b);
+class Rational {
+ private:
+  L num_;
+  L den_;
+  void ToNormal();
+
+ public:
+  Rational();
+  Rational(L num_);  // NOLINT
+  Rational(L n, L d);
+  Rational(const Rational &r);
+  Rational &operator=(const Rational &r);
+  ~Rational() = default;
+  L GetNumerator() const;
+  L GetDenominator() const;
+  void SetNumerator(L n);
+  void SetDenominator(L d);
+  Rational &operator+=(const Rational &right);
+  Rational &operator-=(const Rational &right);
+  Rational &operator*=(const Rational &right);
+  Rational &operator/=(const Rational &right);
+  Rational &operator++();
+  Rational &operator--();
+  Rational operator++(int);
+  Rational operator--(int);
+  Rational operator-() const;
+  Rational operator+() const;
+  friend std::ostream &operator<<(std::ostream &out, const Rational &r);
+  friend std::istream &operator>>(std::istream &in, Rational &r);
+};
+Rational operator+(const Rational &right, const Rational &left);
+Rational operator-(const Rational &right, const Rational &left);
+Rational operator*(const Rational &right, const Rational &left);
+Rational operator/(const Rational &right, const Rational &left);
+bool operator<(const Rational &right, const Rational &left);
+bool operator>(const Rational &right, const Rational &left);
+bool operator<=(const Rational &right, const Rational &left);
+bool operator>=(const Rational &right, const Rational &left);
+bool operator==(const Rational &right, const Rational &left);
+bool operator!=(const Rational &right, const Rational &left);
+
+#endif  // OOP_ASSIGNMENTS_R_H
